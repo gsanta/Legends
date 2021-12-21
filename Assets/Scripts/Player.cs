@@ -3,6 +3,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public static Player instance;
+    public bool isMovementDeactivated = false;
 
     [SerializeField]
     private float moveSpeed = 1f;
@@ -41,15 +42,24 @@ public class Player : MonoBehaviour
         float horizontalMovement = Input.GetAxisRaw("Horizontal");
         float verticalMovement = Input.GetAxisRaw("Vertical");
 
-        rigidBody.velocity = new Vector2(horizontalMovement, verticalMovement) * moveSpeed;
+        if (isMovementDeactivated)
+        {
+            rigidBody.velocity = Vector2.zero;
+        } else
+        {
+            rigidBody.velocity = new Vector2(horizontalMovement, verticalMovement) * moveSpeed;
+        }
 
         animator.SetFloat("movementX", rigidBody.velocity.x);
         animator.SetFloat("movementY", rigidBody.velocity.y);
 
         if (horizontalMovement == 1 || horizontalMovement == -1 || verticalMovement == 1 || verticalMovement == -1)
         {
-            animator.SetFloat("lastMovementX", horizontalMovement);
-            animator.SetFloat("lastMovementY", verticalMovement);
+            if (!isMovementDeactivated)
+            {
+                animator.SetFloat("lastMovementX", horizontalMovement);
+                animator.SetFloat("lastMovementY", verticalMovement);
+            }
         }
 
         transform.position = new Vector3(
