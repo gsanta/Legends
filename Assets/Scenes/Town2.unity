@@ -274,6 +274,32 @@ PolygonCollider2D:
   m_CorrespondingSourceObject: {fileID: 1895763015998445232, guid: 140f94f08e0fc3740a7412a84faff6a5, type: 3}
   m_PrefabInstance: {fileID: 1895763015776863650}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &413007627 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7498618373648253651, guid: bef7bd35599629348bc2ad9a711b91a3, type: 3}
+  m_PrefabInstance: {fileID: 1854490454}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &413007628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 413007627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 125f8360dc37dc745b0113d36f5cbd1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerName: Jimmy
+  playerLevel: 1
+  currentXP: 36
+  maxHP: 100
+  currentHP: 0
+  maxMana: 30
+  currentMana: 0
+  dexterity: 10
+  defence: 30
 --- !u!1 &602163878 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3926269500675451583, guid: 5c36c4c580ea9a6498772984b3e0ed56, type: 3}
@@ -2878,23 +2904,39 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2377632248203034165, guid: e2eb57dacf83f6e459a0803d132562fa, type: 3}
       propertyPath: sentences.Array.size
-      value: 4
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2377632248203034165, guid: e2eb57dacf83f6e459a0803d132562fa, type: 3}
       propertyPath: sentences.Array.data[0]
-      value: Hey, I'm a healer.
+      value: '#Healer'
       objectReference: {fileID: 0}
     - target: {fileID: 2377632248203034165, guid: e2eb57dacf83f6e459a0803d132562fa, type: 3}
       propertyPath: sentences.Array.data[1]
-      value: Hey, I'm a demon
+      value: Hey, I'm a healer.
       objectReference: {fileID: 0}
     - target: {fileID: 2377632248203034165, guid: e2eb57dacf83f6e459a0803d132562fa, type: 3}
       propertyPath: sentences.Array.data[2]
-      value: called Jimmy.
+      value: '#Jimmy'
       objectReference: {fileID: 0}
     - target: {fileID: 2377632248203034165, guid: e2eb57dacf83f6e459a0803d132562fa, type: 3}
       propertyPath: sentences.Array.data[3]
+      value: Hey, I'm a demon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2377632248203034165, guid: e2eb57dacf83f6e459a0803d132562fa, type: 3}
+      propertyPath: sentences.Array.data[4]
+      value: called Jimmy.
+      objectReference: {fileID: 0}
+    - target: {fileID: 2377632248203034165, guid: e2eb57dacf83f6e459a0803d132562fa, type: 3}
+      propertyPath: sentences.Array.data[5]
       value: I have come for your soul.
+      objectReference: {fileID: 0}
+    - target: {fileID: 2377632248203034165, guid: e2eb57dacf83f6e459a0803d132562fa, type: 3}
+      propertyPath: sentences.Array.data[6]
+      value: '#Healer'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2377632248203034165, guid: e2eb57dacf83f6e459a0803d132562fa, type: 3}
+      propertyPath: sentences.Array.data[7]
+      value: Fine
       objectReference: {fileID: 0}
     - target: {fileID: 8925180781913803003, guid: e2eb57dacf83f6e459a0803d132562fa, type: 3}
       propertyPath: m_RootOrder
