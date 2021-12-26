@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,16 @@ public class MenuManager : MonoBehaviour
     private GameObject menu;
 
     public static MenuManager instance;
+
+    private PlayerStats[] playerStats;
+    [SerializeField]
+    private TextMeshProUGUI[] nameText, hpText, manaText, lvlText, xpText;
+    [SerializeField]
+    private Slider[] xpSlider;
+    [SerializeField]
+    private Image[] characterImage;
+    [SerializeField]
+    private GameObject[] characterPanel;
 
     void Start()
     {
@@ -24,9 +35,11 @@ public class MenuManager : MonoBehaviour
             if (menu.activeInHierarchy)
             {
                 menu.SetActive(false);
+                GameManager.instance.gameMenuOpened = false;
             } else
             {
                 menu.SetActive(true);
+                GameManager.instance.gameMenuOpened = true;
             }
         }
     }
