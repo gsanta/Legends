@@ -3,35 +3,35 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour
 {
     [SerializeField]
-    private string playerName;
+    public string playerName;
     [SerializeField]
-    private Sprite characterImage;
+    public Sprite characterImage;
     [SerializeField]
-    private int maxLevel = 50;
+    public int maxLevel = 50;
     [SerializeField]
-    private int playerLevel = 1;
+    public int playerLevel = 1;
     [SerializeField]
-    private int currentXP;
+    public int currentXP;
     [SerializeField]
-    private int[] xpForNextLevel;
+    public int[] xpForNextLevel;
     [SerializeField]
-    private int baseLevelXP = 100;
+    public int baseLevelXP = 100;
 
 
     [SerializeField]
-    private int maxHP = 100;
+    public int maxHP = 100;
     [SerializeField]
-    private int currentHP;
+    public int currentHP;
 
     [SerializeField]
-    private int maxMana = 30;
+    public int maxMana = 30;
     [SerializeField]
-    private int currentMana;
+    public int currentMana;
 
     [SerializeField]
-    private int dexterity;
+    public int dexterity;
     [SerializeField]
-    private int defence;
+    public int defence;
     // Start is called before the first frame update
     void Start()
     {

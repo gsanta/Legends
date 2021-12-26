@@ -39,4 +39,9 @@ public class GameManager : MonoBehaviour
             Player.instance.isMovementDeactivated = false;
         }
     }
+
+    public PlayerStats[] GetPlayerStats()
+    {
+        return playerStats;
+    }
 }
