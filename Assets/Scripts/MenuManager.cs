@@ -16,7 +16,7 @@ public class MenuManager : MonoBehaviour
     private GameObject[] statsButtons;
 
     public static MenuManager instance;
-
+    [SerializeField]
     private PlayerStats[] playerStats;
     [SerializeField]
     private TextMeshProUGUI[] nameText, hpText, manaText, currentXPText, xpText;
@@ -27,6 +27,10 @@ public class MenuManager : MonoBehaviour
     [SerializeField]
     private GameObject[] characterPanel;
 
+    [SerializeField]
+    private TextMeshProUGUI statName, statHp, statMana, statDex, statDef;
+    [SerializeField]
+    private Image characterStatImage;
     void Start()
     {
         instance = this;
@@ -100,7 +104,22 @@ public class MenuManager : MonoBehaviour
         for (int i = 0; i < playerStats.Length; i++)
         {
             statsButtons[i].SetActive(true);
+            statsButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = playerStats[i].playerName;
         }
+
+        StatsMenuUpdate(0);
+    }
+
+    public void StatsMenuUpdate(int playerIndex)
+    {
+        var stat = playerStats[playerIndex];
+        statName.text = stat.playerName;
+        statHp.text = stat.currentHP + "/" + stat.maxHP;
+        statMana.text = stat.currentMana + "/" + stat.maxMana;
+        statDex.text = stat.dexterity.ToString();
+        statDef.text = stat.defence.ToString();
+
+        characterStatImage.sprite = stat.characterImage;
     }
 
     public void QuitGame()
