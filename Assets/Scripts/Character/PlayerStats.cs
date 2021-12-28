@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
+    public static PlayerStats instance;
+
     [SerializeField]
     public string playerName;
     [SerializeField]
@@ -35,6 +37,7 @@ public class PlayerStats : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        instance = this;
         xpForNextLevel = new int[maxLevel];
         xpForNextLevel[1] = baseLevelXP;
 
@@ -71,6 +74,24 @@ public class PlayerStats : MonoBehaviour
             {
                 defence++;
             }
+        }
+    }
+
+    public void AddHP(int amount)
+    {
+        currentHP += amount;
+        if (currentHP > maxHP)
+        {
+            currentHP = maxHP;
+        }
+    }
+    
+    public void AddMana(int amount)
+    {
+        currentMana += amount;
+        if (currentMana > maxMana)
+        {
+            currentMana = maxMana;
         }
     }
 }

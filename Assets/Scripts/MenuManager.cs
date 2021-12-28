@@ -31,6 +31,15 @@ public class MenuManager : MonoBehaviour
     private TextMeshProUGUI statName, statHp, statMana, statDex, statDef;
     [SerializeField]
     private Image characterStatImage;
+    [SerializeField]
+    private GameObject itemButton;
+    [SerializeField]
+    private Transform itemsContainer;
+
+    public TextMeshProUGUI itemName, itemDescription;
+
+    public ItemManager activeItem;
+
     void Start()
     {
         instance = this;
@@ -120,6 +129,52 @@ public class MenuManager : MonoBehaviour
         statDef.text = stat.defence.ToString();
 
         characterStatImage.sprite = stat.characterImage;
+    }
+
+    public void UpdateItemsInventory()
+    {
+        foreach (Transform transform in itemsContainer)
+        {
+            Destroy(transform.gameObject);
+        }
+
+        foreach (ItemManager item in Inventory.instance.GetItemManagerList())
+        {
+            RectTransform itemSlot = Instantiate(itemButton, itemsContainer).GetComponent<RectTransform>();
+            Image itemImage = itemSlot.Find("Items Image").GetComponent<Image>();
+            itemImage.sprite = item.itemsImage;
+            TextMeshProUGUI amountText = itemSlot.Find("Amount Text").GetComponent<TextMeshProUGUI>();
+            if (item.amount > 1)
+            {
+                amountText.text = item.amount.ToString(); 
+            } else
+            {
+                amountText.text = "";
+            }
+
+            itemSlot.GetComponent<ItemsButton>().itemOnButton = item;
+        }
+    }
+
+    public void DiscardItem()
+    {
+        if (activeItem)
+        {
+            if (Inventory.instance.RemoveItem(activeItem))
+            {
+                activeItem = null;
+            }
+            UpdateItemsInventory();
+        }
+    }
+
+    public void UseItem()
+    {
+        if (activeItem)
+        {
+            activeItem.UseItem();
+            DiscardItem();
+        }
     }
 
     public void QuitGame()
