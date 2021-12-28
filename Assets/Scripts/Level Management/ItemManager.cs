@@ -34,17 +34,35 @@ public class ItemManager : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void UseItem()
+    public void UseItem(int characterToUseOn)
     {
+        PlayerStats selectedCharacter = GameManager.instance.GetPlayerStats()[characterToUseOn];
+
         if (itemType == ItemType.Item)
         {
             if (affectType == AffectType.HP)
             {
-                PlayerStats.instance.AddHP(amountOfAffect);
+                selectedCharacter.AddHP(amountOfAffect);
             } else if (affectType == AffectType.Mana)
             {
-                PlayerStats.instance.AddMana(amountOfAffect);
+                selectedCharacter.AddMana(amountOfAffect);
             }
-        }
+        } else if (itemType == ItemType.Weapon) 
+        {
+            if (selectedCharacter.equippedWeaponName != "")
+            {
+                Inventory.instance.AddItemManager(selectedCharacter.equipedWeapon);
+            }
+
+            selectedCharacter.EquipWeapon(this);
+        } else if (itemType == ItemType.Armor) 
+        {
+            if (selectedCharacter.equippedArmorName != "")
+            {
+                Inventory.instance.AddItemManager(selectedCharacter.equipedArmor);
+            }
+
+            selectedCharacter.EquipArmor(this);
+        } 
     }
 }

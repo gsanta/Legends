@@ -28,7 +28,9 @@ public class MenuManager : MonoBehaviour
     private GameObject[] characterPanel;
 
     [SerializeField]
-    private TextMeshProUGUI statName, statHp, statMana, statDex, statDef;
+    private TextMeshProUGUI statName, statHp, statMana, statDex, statDef, statEquipedWeapon, statEquipedArmor;
+    [SerializeField]
+    private TextMeshProUGUI statWeaponPower, statArmorDefence;
     [SerializeField]
     private Image characterStatImage;
     [SerializeField]
@@ -39,6 +41,11 @@ public class MenuManager : MonoBehaviour
     public TextMeshProUGUI itemName, itemDescription;
 
     public ItemManager activeItem;
+
+    [SerializeField]
+    private GameObject characterChoicePanel;
+    [SerializeField]
+    private TextMeshProUGUI[] itemsCharacterChoiceNames;
 
     void Start()
     {
@@ -129,6 +136,11 @@ public class MenuManager : MonoBehaviour
         statDef.text = stat.defence.ToString();
 
         characterStatImage.sprite = stat.characterImage;
+
+        statEquipedWeapon.text = stat.equippedWeaponName;
+        statEquipedArmor.text = stat.equippedArmorName;
+        statWeaponPower.text = stat.weaponPower.ToString();
+        statArmorDefence.text = stat.armorDefence.ToString();
     }
 
     public void UpdateItemsInventory()
@@ -168,13 +180,37 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    public void UseItem()
+    public void UseItem(int selectedCharacter)
     {
         if (activeItem)
         {
-            activeItem.UseItem();
+            activeItem.UseItem(selectedCharacter);
+            OpenCharacterChoicePanel();
             DiscardItem();
         }
+    }
+
+    public void OpenCharacterChoicePanel()
+    {
+        characterChoicePanel.SetActive(true);
+
+        if (activeItem)
+        {
+            for (int i = 0; i < playerStats.Length; i++)
+            {
+                PlayerStats activePlayer = GameManager.instance.GetPlayerStats()[i];
+                itemsCharacterChoiceNames[i].text = activePlayer.playerName;
+
+                bool activePlayerAvailable = activePlayer.gameObject.activeInHierarchy;
+
+                itemsCharacterChoiceNames[i].transform.parent.gameObject.SetActive(activePlayerAvailable);
+            }
+        }
+    }
+
+    public void CloseCharacterChoicePanel()
+    {
+        characterChoicePanel.SetActive(false);
     }
 
     public void QuitGame()
