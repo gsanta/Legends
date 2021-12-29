@@ -11,7 +11,9 @@ public class GameManager : MonoBehaviour
 
     public bool gameMenuOpened = false;
     public bool dialogBoxOpened = false;
+    public bool shopOpen = false;
 
+    public int currentBitcoins;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,7 +33,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameMenuOpened || dialogBoxOpened)
+        if (gameMenuOpened || dialogBoxOpened || shopOpen)
         {
             Player.instance.isMovementDeactivated = true;
         } else
