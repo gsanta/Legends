@@ -21,6 +21,13 @@ public class ShopManager : MonoBehaviour
     [SerializeField]
     private Transform sellItemsContainerParent;
 
+    [SerializeField]
+    private ItemManager selectedItem;
+    [SerializeField]
+    private TextMeshProUGUI buyItemName, buyItemDescription, buyItemValue;
+    [SerializeField]
+    private TextMeshProUGUI sellItemName, sellItemDescription, sellItemValue;
+
     void Start()
     {
         instance = this;    
@@ -72,6 +79,48 @@ public class ShopManager : MonoBehaviour
             amountText.text = "";
 
             itemSlot.GetComponent<ItemsButton>().itemOnButton = item;
+        }
+    }
+
+    public void SelectedBuyItem(ItemManager item)
+    {
+        selectedItem = item;
+        buyItemName.text = selectedItem.itemName;
+        buyItemDescription.text = selectedItem.itemDescription;
+        buyItemValue.text = "Value: " + selectedItem.valueInCoins;
+    }
+
+    public void SelectedSellItem(ItemManager item)
+    {
+        selectedItem = item;
+        sellItemName.text = selectedItem.itemName;
+        sellItemDescription.text = selectedItem.itemDescription;
+        sellItemValue.text = "Value: " + (int)(selectedItem.valueInCoins * 0.75);
+    }
+
+
+    public void BuyItem()
+    {
+        if (GameManager.instance.currentBitcoins >= selectedItem.valueInCoins)
+        {
+            GameManager.instance.currentBitcoins -= selectedItem.valueInCoins;
+            Inventory.instance.AddItemManager(selectedItem);
+
+            currentBitCoinText.text = "BTC: " + GameManager.instance.currentBitcoins;
+        }
+    }
+
+    public void SellItem()
+    {
+        if (selectedItem)
+        {
+            GameManager.instance.currentBitcoins += (int)(selectedItem.valueInCoins * 0.75);
+            Inventory.instance.RemoveItem(selectedItem);
+
+            currentBitCoinText.text = "BTC: " + GameManager.instance.currentBitcoins;
+            selectedItem = null;
+
+            OpenSellPanel();
         }
     }
 }

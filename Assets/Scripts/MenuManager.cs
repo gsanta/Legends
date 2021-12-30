@@ -9,7 +9,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField]
     private Image fadeImage;
     [SerializeField]
-    private GameObject menu;
+    public GameObject menu;
     [SerializeField]
     private GameObject panels;
     [SerializeField]
@@ -170,14 +170,8 @@ public class MenuManager : MonoBehaviour
 
     public void DiscardItem()
     {
-        if (activeItem)
-        {
-            if (Inventory.instance.RemoveItem(activeItem))
-            {
-                activeItem = null;
-            }
-            UpdateItemsInventory();
-        }
+        RemoveItem();
+        AudioManager.instance.PlaySFX(3);
     }
 
     public void UseItem(int selectedCharacter)
@@ -186,7 +180,20 @@ public class MenuManager : MonoBehaviour
         {
             activeItem.UseItem(selectedCharacter);
             OpenCharacterChoicePanel();
-            DiscardItem();
+            RemoveItem();
+            AudioManager.instance.PlaySFX(8);
+        }
+    }
+
+    private void RemoveItem()
+    {
+        if (activeItem)
+        {
+            if (Inventory.instance.RemoveItem(activeItem))
+            {
+                activeItem = null;
+            }
+            UpdateItemsInventory();
         }
     }
 

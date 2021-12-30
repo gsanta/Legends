@@ -23,6 +23,7 @@ public class ItemManager : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            AudioManager.instance.PlaySFX(6);
             Inventory.instance.AddItemManager(this);
             //gameObject.SetActive(false);
             SelfDestroy();
