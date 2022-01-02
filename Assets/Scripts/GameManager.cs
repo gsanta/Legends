@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -45,5 +43,21 @@ public class GameManager : MonoBehaviour
     public PlayerStats[] GetPlayerStats()
     {
         return playerStats;
+    }
+
+    public void SaveData()
+    {
+        PlayerPrefs.SetFloat("Player_Pos_X", Player.instance.transform.position.x);
+        PlayerPrefs.SetFloat("Player_Pos_Y", Player.instance.transform.position.y);
+        PlayerPrefs.SetFloat("Player_Pos_Z", Player.instance.transform.position.z);
+    }
+
+    public void LoadData()
+    {
+        float x = PlayerPrefs.GetFloat("Player_Pos_X");
+        float y = PlayerPrefs.GetFloat("Player_Pos_Y");
+        float z = PlayerPrefs.GetFloat("Player_Pos_Z");
+
+        Player.instance.transform.position = new Vector3(x, y, z);
     }
 }

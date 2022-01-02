@@ -16,6 +16,9 @@ public class Player : MonoBehaviour
     private Vector3 bottomLeftEdge;
     private Vector3 topRightEdge;
 
+    public Vector3 movement;
+    public GameObject firePoint;
+
     public void SetLimit(Vector3 bottomLeftEdge, Vector3 topRightEdge)
     {
         this.bottomLeftEdge = bottomLeftEdge;
@@ -41,6 +44,12 @@ public class Player : MonoBehaviour
     {
         float horizontalMovement = Input.GetAxisRaw("Horizontal");
         float verticalMovement = Input.GetAxisRaw("Vertical");
+
+        if (horizontalMovement != 0 || verticalMovement != 0)
+        {
+            movement = new Vector2(horizontalMovement, verticalMovement);
+            firePoint.transform.position = transform.position + (movement.normalized);
+        }
 
         if (isMovementDeactivated)
         {
